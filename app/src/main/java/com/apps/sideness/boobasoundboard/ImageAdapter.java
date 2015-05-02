@@ -84,6 +84,7 @@ public class ImageAdapter extends BaseAdapter {
             R.drawable.im67, R.drawable.im68,
             R.drawable.im69, R.drawable.im70,
             R.drawable.im71, R.drawable.im72,
-            R.drawable.im73, R.drawable.im74
+            R.drawable.im73, R.drawable.im74,
+            R.drawable.im75
     };
 }
