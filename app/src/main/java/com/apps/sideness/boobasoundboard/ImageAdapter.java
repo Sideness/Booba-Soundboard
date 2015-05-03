@@ -1,20 +1,24 @@
 package com.apps.sideness.boobasoundboard;
 
+import android.app.Activity;
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 /**
  * Created by Sideness on 02/05/2015.
  */
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
+    private Activity activity;
 
-    public ImageAdapter(Context c) {
-        mContext = c;
+    public ImageAdapter(Activity activity) {
+        this.activity = activity;
     }
 
     public int getCount() {
@@ -22,28 +26,43 @@ public class ImageAdapter extends BaseAdapter {
     }
 
     public Object getItem(int position) {
-        return null;
+        return mThumbIds[position];
     }
 
     public long getItemId(int position) {
         return 0;
     }
+    public static class ViewHolder
+    {
+        public ImageView imgViewFlag;
+        public TextView txtViewTitle;
+    }
+
 
     // create a new ImageView for each item referenced by the Adapter
     public View getView(int position, View convertView, ViewGroup parent) {
-        ImageView imageView;
+        ViewHolder v;
+        LayoutInflater li = activity.getLayoutInflater();
         if (convertView == null) {
             // if it's not recycled, initialize some attributes
-            imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new GridView.LayoutParams(300, 300));
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setPadding(8, 8, 8, 8);
+//            imageView = new ImageView(mContext);
+//            imageView.setLayoutParams(new GridView.LayoutParams(300, 300));
+//            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+//            imageView.setPadding(8, 8, 8, 8);
+
+                v = new ViewHolder();
+                convertView = li.inflate(R.layout.image_adapter_layout, null);
+                v.txtViewTitle = (TextView) convertView.findViewById(R.id.icon_text);
+                v.imgViewFlag = (ImageView) convertView.findViewById(R.id.icon_image);
+
+                convertView.setTag(v);
         } else {
-            imageView = (ImageView) convertView;
+            v = (ViewHolder) convertView.getTag();
         }
 
-        imageView.setImageResource(mThumbIds[position]);
-        return imageView;
+        v.txtViewTitle.setText(mThumbTx[position]);
+        v.imgViewFlag.setImageResource(mThumbIds[position]);
+        return convertView;
     }
 
     // references to our images
@@ -86,5 +105,46 @@ public class ImageAdapter extends BaseAdapter {
             R.drawable.im71, R.drawable.im72,
             R.drawable.im73, R.drawable.im74,
             R.drawable.im75
+    };
+
+    private String[] mThumbTx = {
+            "Bienvenue à bord","99 galères",
+            "B.A.B","Bah ouais Morray",
+            "O.S.B.L.C","Popeye",
+            "Izi Izi Izi","Christophe Colomb",
+            "Je t'apprécie beaucoup","Customisée",
+            "Caresse","Du, du, du biff",
+            "Eau bénite","Ecran Plasma",
+            "Ici c'est Paris","Liquide de refroidissement",
+            "Lingerie","La chatte à ta mère",
+            "Rocco","Ragnagna",
+            "M'aimerais-tu encore ?","Garde la pêche",
+            "Je ne vous aime pas non plus","Sans faire de tâche",
+            "Matérialiste","Numéro 10",
+            "#OKLM","Lâche ton number",
+            "Oseille","Salami",
+            "Si t'es sérieuse","Tu peux rester",
+            "Steak-frites","Fourrure",
+            "Eglise","Wesh",
+            "Filet-o-fish","Chou-fleur",
+            "Emile","Pas de fesses",
+            "Tu veux détronner le duc ?","Tu veux du taf ?",
+            "Uncle Ben's","Booba",
+            "G.H.B","Bordel !",
+            "A l'aise","Immobilier",
+            "Connasses","Double Poney Swag",
+            "Les hommes","Pain aux raisins",
+            "Grosses Ye-cou","Petit massage",
+            "Rien à damer","Mes baskets",
+            "Bluetooth","Sel et poivre",
+            "Vaisselle","Cul à l'air sur un hammac",
+            "Ra-tata-tat","Dans mon bed",
+            "Hôtel Ibis","Sopalin",
+            "Le cul de ta soeur","Les chicots",
+            "Bim Bam Boum","Bam Bilibam",
+            "Bois de boulogne","Roque-quette",
+            "Je me faisais sucer","On s'ennuie",
+            "Salam RAP FR","Ton Phone-tel",
+            "Détronner le tuc"
     };
 }

@@ -31,7 +31,7 @@ public class MainActivity extends ActionBarActivity {
         MainActivity.context = getApplicationContext();
 
         final GridView gridview = (GridView) findViewById(R.id.gridview);
-        gridview.setAdapter(new ImageAdapter(this));
+        gridview.setAdapter(new ImageAdapter(MainActivity.this));
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v,
@@ -50,7 +50,8 @@ public class MainActivity extends ActionBarActivity {
                     RotateAnimation r = new RotateAnimation(ROTATE_FROM, ROTATE_TO, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
                     r.setDuration((long) 2 * 1500);
                     //gridview.getAdapter().getView(position, this, this);
-                    gridview.getChildAt(position - gridview.getFirstVisiblePosition()).startAnimation(r);
+                    gridview.getChildAt(position - gridview.getFirstVisiblePosition()).findViewById(R.id.icon_image).startAnimation(r);
+                            //.startAnimation(r);
                     mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
 
                         public void onCompletion(MediaPlayer mp) {
