@@ -1,24 +1,19 @@
 package com.apps.sideness.boobasoundboard;
 
-import android.app.Application;
+import android.app.Activity;
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.support.v4.app.NotificationCompatSideChannelService;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.Toast;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends Activity {
 
     private static Context context;
     private static final float ROTATE_FROM = 0.0f;
@@ -55,8 +50,7 @@ public class MainActivity extends ActionBarActivity {
                     mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
 
                         public void onCompletion(MediaPlayer mp) {
-
-                            gridview.getChildAt(position - gridview.getFirstVisiblePosition()).clearAnimation();
+                            mp.release();
                         }
                     });
                 }catch(Exception e){
@@ -65,27 +59,5 @@ public class MainActivity extends ActionBarActivity {
 
             }
         });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }
